@@ -1,4 +1,4 @@
-### Hello, World
+### Hello, Git
 
 ```
 git add readme.md
