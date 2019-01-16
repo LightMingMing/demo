@@ -3,7 +3,7 @@
 ```
 git add readme.md
 
-git commit
+git commit -m message
 
 git push origin master -u
 
