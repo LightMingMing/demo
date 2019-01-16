@@ -44,3 +44,130 @@ collaborate (see also: git help workflows)
    pull       Fetch from and integrate with another repository or a local branch
    push       Update remote refs along with associated objects
 ```
+
+### Mockito
+
+#### Basic Step
+
+```java
+1. mock/spy
+2. when
+3. thenReturn thenThrow thenAnswer
+4. verify
+
+1. mock/spy
+2. doReturn doThrow doAnswer
+3. when
+4. verify
+```
+
+#### ArgumentMatchers
+
+```java
+<T> T any();
+<T> T any(Class<T> type);
+<T> T isA(Class<T> type);
+int anyInt(); // byte、short、double、float、long...
+String anyString();
+
+<T> List<T> anyList();
+<T> List<T> anyListOf(Class<T>); //Set、Map、Collection
+
+boolean eq(byte); // byte、boolean、short、int...
+
+<T> T isNull();
+<T> T isNull(Class<T>);
+<T> T notNull();
+<T> T notNull(Class<T>);
+<T> T isNotNull();
+<T> T isNotNull(Class<T>);
+<T> T nullable(Class<T>);
+
+String matches(String);
+String matches(Pattern);
+String endsWith(String);
+String startWith(String);
+
+// customize argument matcher
+<T> T argThat(ArgumentMatcher<T>);
+char charThat(ArgumentMather<Character>); // byte、boolean...
+```
+
+```java
+public interface ArgumentMatcher<T> {
+    boolean matches(T argument);
+}
+```
+
+#### AdditionalAnswers
+
+```java
+<T> Answer<T> returnsFirstArg();
+<T> Answer<T> returnsSecondArg();
+<T> Answer<T> returnsLastArg();
+<T> Answer<T> returnsArgAt(int);
+
+<T> Answer<T> delegatesTo(Object);
+
+<T> Answer<T> returnsElementsOf(Collection<?>);
+
+<T> Answer<T> answersWithDelay(long, Answer<T>);
+
+<T> Answer<T> answer(Answer1<T, A>);
+Ansower<Void> answerVoid(VoidAnswer1<A>);
+```
+
+#### VerificationMode
+
+```java
+public class Mockito extends ArgumentMatchers {
+    static VerificationMode times(int);
+    static VerificationMode never();
+    static VerificationMode atLeastOnce();
+    static VerificationMode atLeast(int);
+    static VerificationMode atMost(int);
+    static VerificationMode calls(int);
+    static VerificationMode only();
+    static VerificationMode timeout(long);
+    static VerificationMode after(long);
+}
+```
+
+#### Little demo
+
+```java
+//1.
+mock.foo();
+verify(mock, after(1000)).foo();
+//waits 1000 millis and succeeds
+
+//2.
+mock.foo();
+verify(mock, timeout(1000));
+//succeeds immediately
+```
+
+```java
+Class<UserRepository> clazz = UserRepository.class;
+UserRepository userRepository = Mockito.mock(clazz);
+Mockito.when(userRepository.count()).thenReturn(123);
+Mockito.when(userRepository.getName("MingMing")).thenReturn("ZhaoMingMing");
+
+userRepository.count();
+userRepository.getName("MingMing");
+userRepository.getName("MingMing");
+userRepository.getName("MingMing");
+
+Mockito.verify(userRepository).count();
+// Equals Mockito.verify(userRepository, Mockito.time(1)).count();
+
+Mockito.verify(userRepository, Mockito.atLeast(1)).getName("MingMing");
+Mockito.verify(userRepository, Mockito.atLeast(2)).getName("MingMing");
+```
+
+```java
+Echo echo = Mockito.mock(Echo.class);
+Mockito.doAnswer(AdditionalAnswers.returnsFirstArg()).when(echo).echo(Mockito.any());
+Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
+```
+

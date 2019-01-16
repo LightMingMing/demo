@@ -37,6 +37,7 @@ public class MockitoTest {
 		List<String> list = new LinkedList<>();
 		List<String> mockList = Mockito.spy(list);
 		Mockito.when(mockList.get(0)).thenReturn("100");
+		// Mockito.doReturn("100").when(mockList).get(0);
 		Assert.assertEquals(mockList.get(0), "100");
 	}
 
@@ -44,7 +45,7 @@ public class MockitoTest {
 	public void testLinkedListSpyCorrect() {
 		List<String> list = new LinkedList<>();
 		List<String> mockList = Mockito.spy(list);
-		// // Have to use doReturn() for stubbing
+		// // Have to use doReturn().when().get() for stubbing
 		Mockito.doReturn(10).when(mockList).size();
 		Mockito.doReturn("123").when(mockList).get(0);
 		Assert.assertEquals(mockList.size(), 10);
@@ -71,7 +72,5 @@ public class MockitoTest {
 
 		//
 	}
-	
-	
 
 }

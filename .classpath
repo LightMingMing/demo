@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/mockito-core-2.23.4.jar" sourcepath="C:/Users/18499/AppData/Local/Temp/.org.sf.feeling.decompiler1547512242702/source/mockito-core-2.23.4-sources-1547513474766.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-core-2.23.4.jar"/>
 	<classpathentry kind="lib" path="lib/byte-buddy-1.9.3.jar"/>
 	<classpathentry kind="lib" path="lib/byte-buddy-agent-1.9.3.jar"/>
 	<classpathentry kind="lib" path="lib/objenesis-2.6.jar"/>
