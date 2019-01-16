@@ -169,5 +169,11 @@ Mockito.verify(userRepository, Mockito.atLeast(2)).getName("MingMing");
 Echo echo = Mockito.mock(Echo.class);
 Mockito.doAnswer(AdditionalAnswers.returnsFirstArg()).when(echo).echo(Mockito.any());
 Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
+
+Echo echo = Mockito.mock(Echo.class);
+Mockito.when(echo.echo(Mockito.any())).thenAnswer(i -> {
+	return i.getArgument(0);
+});
+Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
 ```
 

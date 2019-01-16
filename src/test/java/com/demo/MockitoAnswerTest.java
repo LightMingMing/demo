@@ -35,7 +35,7 @@ public class MockitoAnswerTest {
 		Mockito.when(echo.echo(Mockito.any())).thenAnswer(i -> {
 			return i.getArgument(0);
 		});
-		Mockito.doAnswer(AdditionalAnswers.returnsFirstArg()).when(echo).echo(Mockito.any());
+		// Mockito.doAnswer(AdditionalAnswers.returnsFirstArg()).when(echo).echo(Mockito.any());
 
 		Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
 
