@@ -45,6 +45,75 @@ collaborate (see also: git help workflows)
    push       Update remote refs along with associated objects
 ```
 
+[LearnGit](https://learngitbranching.js.org/?NODEMO)
+
+```bash
+git branch bugFix
+git checkout bugFix
+
+git checkout -b bugFix
+
+git merge bugFix
+git rebase master
+git rebase master bugFix
+git rebase bugFix side
+git rebase side another
+
+HEAD 指向当前分支最近一次提交记录，一般都是分支名
+分离的HEAD，指向具体提交记录，而不是分支名
+
+相对引用 ^向上移动一个提交记录 ~<num>向上移动多个提交记录
+
+git checkout HEAD^
+git checkout master^^
+git checkout HEAD^2 2个父节点
+
+git branch -f master HEAD~3 分支指向另一个提交
+
+git reset HEAD~1 撤销本地改动(回退分支记录)
+git revert HEAD 撤销远程分支改动
+
+git cherry-pick <提交号...> 将提交记录放到当前分支
+
+git rebase -i 交互式rebase,列出将要被复制到目标分支的备选提交记录
+git rebase -i HEAD~4 调整顺序或删除提交记录
+
+
+git tag tagName HEAD 创建标签
+git tag v1 HEAD
+
+git describe <ref>
+	<tag>_<numCommits>_g<hash>
+
+git branch bugWork master^^2^
+```
+
+```bash
+git clone 
+
+orign/master 远程分支 <remote_name>/<branch_name>
+在它上提交会进入分离HEAD状态，远程分支只有在远程仓库中相应的分支更新了才会更新
+
+git fetch 远程仓库的更新下载至远程分支，更新远程分支指针，不会改变本地仓库的状态
+
+当远程分支中有新的提交时，可以向合并本地分支那样合并远程分支
+git cherry-pick orign/master
+git rebase orign/master
+git merge orign/master
+
+git fetch
+git merge orign/master  
+== git pull
+
+git fetch
+git rebase orign/master
+== git pull --rebase
+
+git push 向远程远程仓库提交记录、远程分支也会更新
+```
+
+
+
 ### Mockito
 
 #### Basic Step
