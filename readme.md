@@ -93,22 +93,22 @@ git branch bugWork master^^2^
 ```bash
 git clone 
 
-orign/master 远程分支 <remote_name>/<branch_name>
+origin/master 远程分支 <remote_name>/<branch_name>
 在它上提交会进入分离HEAD状态，远程分支只有在远程仓库中相应的分支更新了才会更新
 
 git fetch 远程仓库的更新下载至远程分支，更新远程分支指针，不会改变本地仓库的状态
 
 当远程分支中有新的提交时，可以向合并本地分支那样合并远程分支
-git cherry-pick orign/master
-git rebase orign/master
-git merge orign/master
+git cherry-pick origin/master
+git rebase origin/master
+git merge origin/master
 
 git fetch
-git merge orign/master  
+git merge origin/master  
 == git pull
 
 git fetch
-git rebase orign/master
+git rebase origin/master
 == git pull --rebase
 
 git push 向远程远程仓库提交记录、远程分支也会更新
