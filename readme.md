@@ -114,7 +114,7 @@ git push 向远程远程仓库提交记录、远程分支也会更新
 
 ### JUnit4
 
-![](JUnit4 Statement.svg)
+![](/JUnit4.svg)
 
 
 
