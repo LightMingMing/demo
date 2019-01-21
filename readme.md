@@ -45,8 +45,6 @@ collaborate (see also: git help workflows)
    push       Update remote refs along with associated objects
 ```
 
-![Git命令速查表](/git.jpg)
-
 [LearnGit](https://learngitbranching.js.org/?NODEMO)
 
 ```bash
