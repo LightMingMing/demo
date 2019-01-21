@@ -246,3 +246,62 @@ Mockito.when(echo.echo(Mockito.any())).thenAnswer(i -> {
 Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
 ```
 
+### byte-buddy(伙伴)
+
+[官方帮助文档](http://bytebuddy.net/#/tutorial)
+
+> Byte Buddy is a code generation and manipulation library for creating and modifying Java classes during the runtime of a Java application and without the help of a compiler.  
+>
+> Java字节码生成和修改库，能够在运行期间，创建或修改Java类
+
+```java
+Class<?> dynamicType = new ByteBuddy().subclass(Object.class).method(ElementMatchers.named("toString"))
+				.intercept(FixedValue.value("Hello, world!")).make().load(SimpleDemo.class.getClassLoader())
+				.getLoaded();
+System.out.println(dynamicType.getName());
+System.out.println(dynamicType.newInstance().toString());
+
+/* output:
+net.bytebuddy.renamed.java.lang.Object$ByteBuddy$csGs4nHo
+Hello, world!
+ */
+```
+
+```java
+DynamicType.Unloaded<Object> uploaded = new ByteBuddy(ClassFileVersion.JAVA_V8).subclass(Object.class).make();
+DynamicType.Loaded<Object> loaded = uploaded.load(SimpleDemo.class.getClassLoader());
+		Files.write(Paths.get("D:/", "DynamicType.class"), loaded.getBytes(), StandardOpenOption.CREATE);
+```
+
+```java
+D:\>javap -v DynamicType
+警告: 二进制文件DynamicType包含net.bytebuddy.renamed.java.lang.Object$ByteBuddy$WhaIw1Rt
+Classfile /D:/DynamicType.class
+  Last modified 2019-1-21; size 172 bytes
+  MD5 checksum 68f39d3c8969aaa14d5755fb57a0fbfa
+public class net.bytebuddy.renamed.java.lang.Object$ByteBuddy$WhaIw1Rt
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Utf8               net/bytebuddy/renamed/java/lang/Object$ByteBuddy$WhaIw1Rt
+   #2 = Class              #1             // net/bytebuddy/renamed/java/lang/Object$ByteBuddy$WhaIw1Rt
+   #3 = Utf8               java/lang/Object
+   #4 = Class              #3             // java/lang/Object
+   #5 = Utf8               <init>
+   #6 = Utf8               ()V
+   #7 = NameAndType        #5:#6          // "<init>":()V
+   #8 = Methodref          #4.#7          // java/lang/Object."<init>":()V
+   #9 = Utf8               Code
+{
+  public net.bytebuddy.renamed.java.lang.Object$ByteBuddy$WhaIw1Rt();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #8                  // Method java/lang/Object."<init>":()V
+         4: return
+}
+```
+
