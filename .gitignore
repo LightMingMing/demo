@@ -4,4 +4,11 @@
 # Ignore Gradle build output directory
 build
 
+# eclipse
+bin
+.settings
+.classpath
+.project
+
+# idea
 .idea
