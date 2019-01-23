@@ -1,5 +1,6 @@
 package com.demo.mockito;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,7 +29,7 @@ public class UserServiceTest {
 	@Test
 	public void countTest2() {
 		Mockito.when(userRepository.count()).thenReturn(100);
-		System.out.println(userService.count());
-		Mockito.verify(userService).count();
+		Assert.assertEquals(100, userService.count());
+		Mockito.verify(userRepository).count();
 	}
 }

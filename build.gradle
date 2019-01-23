@@ -30,5 +30,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 	
 	// Use Mockito test framework
+	compile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 }

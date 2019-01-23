@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 
 import com.demo.repository.UserRepository;
 
+@SuppressWarnings("rawtypes")
 public class MockitoTest {
 
 	@Test
@@ -71,6 +72,18 @@ public class MockitoTest {
 		Mockito.verify(userRepository, Mockito.atLeast(2)).getName("MingMing");
 
 		//
+	}
+
+	@Test
+	public void argumentMatchers() {
+		List mockedList = Mockito.mock(List.class);
+
+		Mockito.when(mockedList.get(Mockito.anyInt())).thenReturn("Element");
+
+		Assert.assertEquals(mockedList.get(1), "Element");
+
+		Mockito.verify(mockedList).get(1);
+		Mockito.verify(mockedList).get(Mockito.anyInt());
 	}
 
 }
