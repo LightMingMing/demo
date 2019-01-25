@@ -86,4 +86,11 @@ public class MockitoTest {
 		Mockito.verify(mockedList).get(Mockito.anyInt());
 	}
 
+	@Test
+	public void zeroInteractions() {
+		List mockedList = Mockito.mock(List.class);
+
+		Mockito.verifyZeroInteractions(mockedList);
+	}
+
 }
