@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 
 import com.demo.repository.UserRepository;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class MockitoTest {
 
 	@Test
@@ -91,6 +91,18 @@ public class MockitoTest {
 		List mockedList = Mockito.mock(List.class);
 
 		Mockito.verifyZeroInteractions(mockedList);
+	}
+
+	@Test
+	public void noMoreInteractions() {
+		List mockedList = Mockito.mock(List.class);
+		mockedList.add("one");
+		mockedList.add("two");
+
+		Mockito.verify(mockedList).add("one");
+		Mockito.verify(mockedList).add("two");
+
+		Mockito.verifyNoMoreInteractions(mockedList);
 	}
 
 }
