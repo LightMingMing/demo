@@ -250,6 +250,34 @@ Mockito.when(echo.echo(Mockito.any())).thenAnswer(i -> {
 Assert.assertEquals(echo.echo("firstArg", "secondArg", "thirdArg"), "firstArg");
 ```
 
+### BDDMockito
+> BDD(Behavior Driven Development) 行为驱动模式, 流程:`given`-> `when` -> `then`
+```java
+public class BDDMockito extends Mockito {
+	
+	 public static <T> BDDMyOngoingStubbing<T> given(T methodCall) {
+        return new BDDOngoingStubbingImpl<T>(Mockito.when(methodCall));
+    }
+    
+	public static BDDStubber willReturn(Object toBeReturned) {
+        return new BDDStubberImpl(Mockito.doReturn(toBeReturned));
+    }
+	
+	public static BDDStubber willThrow(Throwable... toBeThrown) {
+        return new BDDStubberImpl(Mockito.doThrow(toBeThrown));
+    }
+    
+	public static BDDStubber willAnswer(Answer<?> answer) {
+        return new BDDStubberImpl(Mockito.doAnswer(answer));
+    }
+    
+	public static <T> Then<T> then(T mock) {
+        return new ThenImpl<T>(mock);
+    }
+	
+}
+```
+
 ### byte-buddy(伙伴)
 
 [官方帮助文档](http://bytebuddy.net/#/tutorial)
