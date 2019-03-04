@@ -10,27 +10,32 @@ import org.mockito.MockitoAnnotations;
 
 public class ArgumentCaptorTest {
 
-    @Captor
-    public ArgumentCaptor<String> captor;
+	@Captor
+	public ArgumentCaptor<String> captor;
 
-    private Foo foo;
+	private Foo foo;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        foo = Mockito.mock(Foo.class);
-        Mockito.when(foo.bar(captor.capture())).thenReturn("hello");
-    }
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		foo = Mockito.mock(Foo.class);
+		Mockito.when(foo.bar(captor.capture())).thenReturn("hello");
+	}
 
-    @Test
-    public void captorTest() {
-        Assert.assertEquals("hello", foo.bar("123"));
-        Assert.assertEquals("123", captor.getValue());
-    }
+	@Test
+	public void captorTest() {
+		Assert.assertEquals("hello", foo.bar("123"));
+		Assert.assertEquals("123", captor.getValue());
 
+		Assert.assertEquals("hello", foo.bar("456"));
+		Assert.assertEquals("456", captor.getValue());
 
-    interface Foo {
+		Assert.assertEquals("123", captor.getAllValues().get(0));
+		Assert.assertEquals("456", captor.getAllValues().get(1));
+	}
 
-        String bar(String hello);
-    }
+	interface Foo {
+
+		String bar(String hello);
+	}
 }
